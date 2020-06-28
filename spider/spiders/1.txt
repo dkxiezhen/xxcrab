@@ -1,0 +1,8 @@
+爬虫练习网站
+0 大学排名
+1 豆瓣250
+2 汽车之家
+3 斗图表情包  https://www.doutula.com/photo/list?page=0
+4 梨视频  https://www.pearvideo.com/
+5 在线翻译功能 http://fy.iciba.com/ajax.php?a=fy
+6 京东商城 
