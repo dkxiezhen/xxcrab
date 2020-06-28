@@ -7,4 +7,5 @@ class DoubanSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        pass
+        article = response.css('div.article')
+        
