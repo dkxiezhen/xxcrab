@@ -12,8 +12,10 @@ class DoubanSpider(scrapy.Spider):
             quote = node.css('span.inq::text').get()
             if quote is not None:
                 quote.strip()
+            detail_div = node.css('div.hd')
             yield {
                 'cover':node.css('img::attr(src)').get(),
+                'url':detail_div.css('a::attr(href)').get(),
                 'name':node.css('span.title::text').getall(),
                 'other':node.css('span.other::text').get().strip(),
                 'des':node.css('p::text').get().strip(),
