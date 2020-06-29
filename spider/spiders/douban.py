@@ -9,14 +9,23 @@ class DoubanSpider(scrapy.Spider):
     def parse(self, response):
         article = response.css('div.article')
         for node in article.css('ol li'):
+            quote = node.css('span.inq::text').get()
+            if quote is not None:
+                quote.strip()
             yield {
                 'cover':node.css('img::attr(src)').get(),
                 'name':node.css('span.title::text').getall(),
-                'other':node.css('span.other::text').get(),
-                'des':node.css('p::text').get(),
+                'other':node.css('span.other::text').get().strip(),
+                'des':node.css('p::text').get().strip(),
                 'rating_num':node.css('span.rating_num::text').get(),
-                'quote':node.css('span.inq::text').get(),
+                'quote':quote,
             }
+        
+        next_span = article.css('span.next')
+        next_page = next_span.css('a::attr(href)').get()
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page,callback=self.parse)
 
 
 
